@@ -23,6 +23,10 @@ PUT /mode
 
 GET /state
 
+## TODO
+
+[ ] Switch mock interface based on OS
+
 ## License
 
 MIT

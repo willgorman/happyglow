@@ -31,6 +31,7 @@
     "visionary": "6.x.x",
     "piglow": "3.0.1",
     "piglow-animations": "2.x.x",
+    "piglow-clock": "1.1.x",
     "joi": "10.x.x"
   },
   "optionalDependencies": {
