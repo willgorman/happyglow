@@ -17,7 +17,8 @@ var piGlowBackend = function() {
     } else {
         return new PiGlowBackendMock();
     }
-}
+}();
+
 var piFace = PiGlowInterface(piGlowBackend);
 
 exports.register = function (server, options, next) {
