@@ -6,20 +6,19 @@ var animation = aniGlow.animation;
 var aniFace = aniGlow.piGlowInterface;
 var PiGlowBackendMock = piGlow.BackendMock;
 var PiGlowBackend = piGlow.Backend;
-var piGlowInterface = piGlow.piGlowInterface;
+var PiGlowInterface = piGlow.piGlowInterface;
 
 var myMock = new PiGlowBackendMock();
 // var piFace = piGlowInterface(myMock);
 
-var piFace = function(){
+var piGlowBackend = function() {
     if (process.arch === 'arm') {
-        var backend = new PiGlowBackend();
-        return piGlowInterface(backend);
+        return new PiGlowBackend();
     } else {
-        var myMock = new PiGlowBackendMock();
-        return piGlowInterface(myMock);
+        return new PiGlowBackendMock();
     }
-}();
+}
+var piFace = PiGlowInterface(piGlowBackend);
 
 exports.register = function (server, options, next) {
 
@@ -37,7 +36,7 @@ exports.register = function (server, options, next) {
         path: '/animation/{name}/event',
         handler: function (request, reply) {
             //lets hack
-            animation({ interval: 10, debug: true }, myMock)
+            animation({ interval: 10, debug: true }, piGlowBackend)
                 .set().to(aniFace(['ring_0'])).after('0.1s')
                 .set().to(aniFace(['ring_1'])).after('0.1s')
                 .set().to(aniFace(['ring_2'])).after('0.1s')
